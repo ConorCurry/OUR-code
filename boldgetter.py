@@ -19,7 +19,30 @@ for col in cols:
         if cell.CharWeight > 100:
             bolded_names.append(cell.String.strip().split())
 bolded_names.sort(key = lambda name: name[-1])
+bolded_names = [name[-1] + ', ' + ' '.join(name[:-1]) +'\n' for name in bolded_names]
 with open("boldedNames.txt", "w") as out:
     out.writelines(bolded_names)
     
+remaining_names = bolded_names
+while True:
+    search_substring = input("Enter your search string: ")
+    results = [name for name in bolded_names if search_substring.lower().strip() in name.lower()]
+    [print("{}. {}".format(i, res)) for i, res in enumerate(results)]
+    if len(results) == 1:
+        remaining_names.remove(results[0])
+        continue
+    selection = input("Select one or type none, or done: ")
+    if selection == "none":
+        pass
+    elif selection == "done":
+        break
+    else:
+        try:
+            remaining_names.remove(results[int(selection)])
+        except:
+            print("invalid entry")
+            continue
+with open("namesNotFound.txt", "w") as out:
+    out.writelines(remaining_names)
+
 print("Done!")
