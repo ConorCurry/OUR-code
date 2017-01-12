@@ -10,7 +10,7 @@ active_sheet = model.CurrentController.ActiveSheet
 
 
 cols = ['S', 'T', 'U', 'V', 'W', 'X']
-rows = [i for i in range(2, 213)]
+rows = [i for i in range(2, 214)]
 bolded_names = []
 for col in cols:
     for row in rows:
